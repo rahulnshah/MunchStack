@@ -1,5 +1,7 @@
 package org.example.munchstack.service;
 
+import java.math.BigDecimal;
+
 public interface OrdersList<T> {
     void addOrder(T order);
 
@@ -14,6 +16,8 @@ public interface OrdersList<T> {
     T getEarliestOrder();
 
     int getOrderCount();
+
+    BigDecimal getTotalCost();
 
     void clearOrders();
 

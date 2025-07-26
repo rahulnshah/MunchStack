@@ -80,6 +80,7 @@ public class FastFoodOrders implements OrdersList<FastFood> {
         orders.sort(Comparator.comparing(FastFood::getCreatedAt).reversed());
     }
 
+    @Override
     public BigDecimal getTotalCost() {
         return orders.stream()
                 .map(order -> order.getPrice().multiply(BigDecimal.valueOf(order.getQuantity())))

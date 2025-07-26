@@ -3,6 +3,7 @@ package org.example;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.munchstack.impl.FastFoodOrders;
+import org.example.munchstack.model.Burger;
 import org.example.munchstack.model.Drink;
 import org.example.munchstack.model.FastFood;
 import org.example.munchstack.model.Pizza;
@@ -11,6 +12,7 @@ import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
+import org.example.munchstack.service.OrdersList;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 
@@ -38,13 +40,13 @@ public class App {
                 .cheese("Mozzarella")
                 .build();
 
-        FastFood cheeseBurger = FastFood.builder().name("Cheese Burger")
+        FastFood cheeseBurger = Burger.builder().name("Cheese Burger")
                 .quantity(1)
                 .price(new BigDecimal("8.99"))
                 .status(READY)
                 .build();
 
-        FastFood chickenBurger = FastFood.builder().name("Chicken Burger")
+        FastFood chickenBurger = Burger.builder().name("Chicken Burger")
                 .quantity(3)
                 .price(new BigDecimal("9.99"))
                 .status(READY)
@@ -68,7 +70,7 @@ public class App {
 
         Logger.info("Creating Fast Food Orders List...");
 
-        FastFoodOrders fastFoodOrders = new FastFoodOrders();
+        OrdersList<FastFood> fastFoodOrders = new FastFoodOrders();
         fastFoodOrders.addOrder(pepperoniPizza);
         fastFoodOrders.addOrder(cheeseBurger);
         fastFoodOrders.addOrder(chickenBurger);
@@ -81,6 +83,6 @@ public class App {
         Logger.info("Earliest Order: {}", objectMapper.writeValueAsString(fastFoodOrders.getEarliestOrder()));
 
         Logger.info("Total Orders: {}", fastFoodOrders.getOrderCount());
-        Logger.info("Total Cost: {}", fastFoodOrders.getTotalCost());
+        Logger.info("Total Cost: ${}", fastFoodOrders.getTotalCost());
     }
 }
