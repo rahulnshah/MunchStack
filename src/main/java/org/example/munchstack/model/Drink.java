@@ -1,15 +1,15 @@
 package org.example.munchstack.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import org.example.munchstack.enums.SIZE;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@SuperBuilder
 public class Drink extends FastFood {
     private SIZE size;
 }

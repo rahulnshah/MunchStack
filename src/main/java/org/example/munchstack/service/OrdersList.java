@@ -4,7 +4,7 @@ public interface OrdersList<T> {
     void addOrder(T order);
     void removeOrder(T order);
     void updateOrder(T order);
-    T getOrder(int index);
+    T getOrder(String name);
     int getOrderCount();
     void clearOrders();
     String listOrders();
