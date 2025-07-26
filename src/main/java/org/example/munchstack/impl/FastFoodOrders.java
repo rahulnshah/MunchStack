@@ -13,6 +13,7 @@ public class FastFoodOrders implements OrdersList<FastFood> {
     public FastFoodOrders() {
         this.orders = new ArrayList<>();
     }
+
     @Override
     public void addOrder(FastFood order) {
         orders.add(order);
@@ -63,11 +64,13 @@ public class FastFoodOrders implements OrdersList<FastFood> {
         return orders.isEmpty();
     }
 
+    @Override
     public FastFood getRecentOrder() {
         sortByDate();
         return orders.getFirst();
     }
 
+    @Override
     public FastFood getEarliestOrder() {
         sortByDate();
         return orders.getLast();

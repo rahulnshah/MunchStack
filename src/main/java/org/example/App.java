@@ -1,22 +1,34 @@
 package org.example;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.munchstack.impl.FastFoodOrders;
 import org.example.munchstack.model.Drink;
 import org.example.munchstack.model.FastFood;
 import org.example.munchstack.model.Pizza;
-import org.example.munchstack.service.OrdersList;
 
 import java.math.BigDecimal;
-import java.util.logging.Logger;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import static org.example.munchstack.enums.SIZE.MEDIUM;
 import static org.example.munchstack.enums.STATUS.READY;
 
 public class App {
-    private static final Logger Logger = java.util.logging.Logger.getLogger(App.class);
+    private static final Logger Logger = LoggerFactory.getLogger(App.class);
 
-    public static void main(String[] args) {
 
+    public static void main(String[] args) throws JsonProcessingException {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm a z");
+        objectMapper.setDateFormat(df);
+
+        Logger.info("Welcome to MunchStack Fast Food Ordering System!");
+        Logger.info("Initializing Fast Food Orders...");
         FastFood pepperoniPizza = Pizza.builder().name("Pepperoni Pizza")
                 .quantity(2)
                 .price(new BigDecimal("15.99"))
@@ -54,13 +66,21 @@ public class App {
                 .status(READY)
                 .build();
 
-        OrdersList<FastFood> fastFoodOrders = new FastFoodOrders();
+        Logger.info("Creating Fast Food Orders List...");
+
+        FastFoodOrders fastFoodOrders = new FastFoodOrders();
         fastFoodOrders.addOrder(pepperoniPizza);
         fastFoodOrders.addOrder(cheeseBurger);
         fastFoodOrders.addOrder(chickenBurger);
         fastFoodOrders.addOrder(hawaiianPizza);
         fastFoodOrders.addOrder(mangoParadise);
-        ;
-        System.out.println("Total Orders: " + fastFoodOrders.getOrderCount());
+
+        // print the recent order using object mapper
+        Logger.info("Recent Order: {}", objectMapper.writeValueAsString(fastFoodOrders.getRecentOrder()));
+        // print the earliest order using object mapper
+        Logger.info("Earliest Order: {}", objectMapper.writeValueAsString(fastFoodOrders.getEarliestOrder()));
+
+        Logger.info("Total Orders: {}", fastFoodOrders.getOrderCount());
+        Logger.info("Total Cost: {}", fastFoodOrders.getTotalCost());
     }
 }
