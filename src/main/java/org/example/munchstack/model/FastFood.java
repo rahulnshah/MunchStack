@@ -1,6 +1,7 @@
 package org.example.munchstack.model;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,4 +19,5 @@ public class FastFood
    private int quantity;
    private BigDecimal price;
    private STATUS status;
+   private Date createdAt;
 }
