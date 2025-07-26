@@ -1,9 +1,11 @@
 package org.example.munchstack.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum STATUS {
     PENDING("Pending"),
-    READY("Ready"),
-    COMPLETED("Completed");
+    READY("Ready");
 
     private final String status;
 
@@ -11,7 +13,4 @@ public enum STATUS {
         this.status = status;
     }
 
-    public String getStatus() {
-        return status;
-    }
 }
