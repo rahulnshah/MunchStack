@@ -11,8 +11,8 @@ import org.example.munchstack.model.Pizza;
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.Month;
 
 import org.example.munchstack.service.OrdersList;
 import org.slf4j.LoggerFactory;
@@ -34,13 +34,10 @@ public class MunchStackDriver {
         Logger.info("Welcome to MunchStack Fast Food Ordering System!");
         Logger.info("Initializing Fast Food Orders...");
 
-        Date startTime = new Date();
-        // Add hours, minutes, seconds
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(startTime);
+        LocalDate date = LocalDate.of(2025, Month.NOVEMBER, 25);
 
-        Logger.info("Start Time: {}", startTime);
-        calendar.add(Calendar.HOUR, 1);
+        Logger.info("Start Date: {}", date);
+        date = date.plusWeeks(1);
         FastFood pepperoniPizza = Pizza.builder().name("Pepperoni Pizza")
                 .quantity(2)
                 .price(new BigDecimal("15.99"))
@@ -49,26 +46,32 @@ public class MunchStackDriver {
                 .drizzle("Garlic Sauce")
                 .cheese("Mozzarella")
                 .status(PENDING)
-                .createdAt(calendar.getTime()) // Adding 1 second to the start time for demonstration
+                .createdAt(date) // Adding 1 second to the start time for demonstration
                 .build();
 
-        calendar.add(Calendar.HOUR, 2);
+        date = date.plusWeeks(1);
         FastFood cheeseBurger = Burger.builder().name("Cheese Burger")
+                .bun("Sesame")
+                .patty("Black Bean")
                 .quantity(1)
                 .price(new BigDecimal("8.99"))
+                .condiment("Ketchup")
                 .status(READY)
-                .createdAt(calendar.getTime())
+                .createdAt(date)
                 .build();
 
-        calendar.add(Calendar.HOUR, 3);
+        date = date.plusWeeks(1);
         FastFood chickenBurger = Burger.builder().name("Chicken Burger")
+                .bun("Whole Wheat")
+                .patty("Grilled Chicken")
                 .quantity(3)
                 .price(new BigDecimal("9.99"))
+                .condiment("Mayo")
                 .status(READY)
-                .createdAt(calendar.getTime())
+                .createdAt(date)
                 .build();
 
-        calendar.add(Calendar.HOUR, 4);
+        date = date.plusWeeks(1);
         FastFood hawaiianPizza = Pizza.builder().name("Hawaiian Pizza")
                 .quantity(1)
                 .price(new BigDecimal("14.99"))
@@ -76,17 +79,17 @@ public class MunchStackDriver {
                 .topping("Pineapple")
                 .drizzle("Honey")
                 .cheese("Cheddar")
-                .createdAt(calendar.getTime())
+                .createdAt(date)
                 .status(PENDING)
                 .build();
 
-        calendar.add(Calendar.HOUR, 5);
+        date = date.plusWeeks(1);
         FastFood mangoParadise = Drink.builder().name("Mango Paradise")
                 .quantity(2)
                 .price(new BigDecimal("5.99"))
                 .size(MEDIUM)
                 .status(READY)
-                .createdAt(calendar.getTime())
+                .createdAt(date)
                 .build();
 
         Logger.info("Creating Fast Food Orders List...");
@@ -98,8 +101,10 @@ public class MunchStackDriver {
         fastFoodOrders.addOrder(hawaiianPizza);
         fastFoodOrders.addOrder(mangoParadise);
 
+        Logger.info("Listing All Orders:");
+        fastFoodOrders.listOrders();
         // print the recent order using object mapper
-        Logger.info("Recent Order: {}", objectMapper.writeValueAsString(fastFoodOrders.getRecentOrder()));
+        Logger.info("Recent Order: {}", objectMapper.writeValueAsString(fastFoodOrders.getMostRecentOrder()));
         // print the earliest order using object mapper
         Logger.info("Earliest Order: {}", objectMapper.writeValueAsString(fastFoodOrders.getEarliestOrder()));
 

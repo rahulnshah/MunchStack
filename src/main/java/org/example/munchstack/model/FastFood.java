@@ -1,12 +1,9 @@
 package org.example.munchstack.model;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.example.munchstack.enums.STATUS;
 
@@ -14,13 +11,13 @@ import org.example.munchstack.enums.STATUS;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-public class FastFood
-{
-   private String name;
-   private int quantity;
-   private BigDecimal price;
-   @Builder.Default
-   private STATUS status = STATUS.PENDING;
-   @Builder.Default
-   private Date createdAt = new Date();
+@ToString
+public class FastFood {
+    private String name;
+    private int quantity;
+    private BigDecimal price;
+    @Builder.Default
+    private STATUS status = STATUS.PENDING;
+    @Builder.Default
+    private LocalDate createdAt = LocalDate.now();
 }

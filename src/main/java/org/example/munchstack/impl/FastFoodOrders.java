@@ -55,8 +55,8 @@ public class FastFoodOrders implements OrdersList<FastFood> {
     }
 
     @Override
-    public String listOrders() {
-        return null;
+    public void listOrders() {
+        orders.forEach(System.out::println);
     }
 
     @Override
@@ -65,19 +65,39 @@ public class FastFoodOrders implements OrdersList<FastFood> {
     }
 
     @Override
-    public FastFood getRecentOrder() {
-        sortByDate();
+    public FastFood getMostRecentOrder() {
+        sortByRecentOrders();
         return orders.getFirst();
     }
 
     @Override
     public FastFood getEarliestOrder() {
-        sortByDate();
-        return orders.getLast();
+        sortByEarliestOrders();
+        return orders.getFirst();
     }
 
-    private void sortByDate() {
-        orders.sort(Comparator.comparing(FastFood::getCreatedAt).reversed());
+    private void sortByRecentOrders() {
+        orders.sort((FastFood f1, FastFood f2) -> {
+            if (f1.getCreatedAt().isAfter(f2.getCreatedAt())) {
+                return -1;
+            } else if (f1.getCreatedAt().isBefore(f2.getCreatedAt())) {
+                return 1;
+            } else {
+                return 0;
+            }
+        });
+    }
+
+    private void sortByEarliestOrders() {
+        orders.sort((FastFood f1, FastFood f2) -> {
+            if (f1.getCreatedAt().isAfter(f2.getCreatedAt())) {
+                return 1;
+            } else if (f1.getCreatedAt().isBefore(f2.getCreatedAt())) {
+                return -1;
+            } else {
+                return 0;
+            }
+        });
     }
 
     @Override

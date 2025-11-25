@@ -14,7 +14,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class FastFoodOrdersTest {
-    
+
     private OrdersList<FastFood> orders;
 
     private FastFood mockFood1;
@@ -76,11 +76,11 @@ class FastFoodOrdersTest {
     }
 
     @Test
-    void testGetRecentOrder() {
+    void testGetMostRecentOrder() {
         orders.addOrder(mockFood1);
         orders.addOrder(mockFood2);
 
-        assertEquals(mockFood1, orders.getRecentOrder());
+        assertEquals(mockFood1, orders.getMostRecentOrder());
     }
 
     @Test

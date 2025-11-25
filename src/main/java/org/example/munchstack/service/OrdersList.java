@@ -11,7 +11,7 @@ public interface OrdersList<T> {
 
     T getOrder(String name);
 
-    T getRecentOrder();
+    T getMostRecentOrder();
 
     T getEarliestOrder();
 
@@ -21,7 +21,7 @@ public interface OrdersList<T> {
 
     void clearOrders();
 
-    String listOrders();
+    void listOrders();
 
     boolean isEmpty();
 }
