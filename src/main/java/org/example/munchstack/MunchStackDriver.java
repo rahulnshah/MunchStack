@@ -1,4 +1,4 @@
-package org.example;
+package org.example.munchstack;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,8 +22,8 @@ import static org.example.munchstack.enums.SIZE.MEDIUM;
 import static org.example.munchstack.enums.STATUS.PENDING;
 import static org.example.munchstack.enums.STATUS.READY;
 
-public class App {
-    private static final Logger Logger = LoggerFactory.getLogger(App.class);
+public class MunchStackDriver {
+    private static final Logger Logger = LoggerFactory.getLogger(MunchStackDriver.class);
 
 
     public static void main(String[] args) throws JsonProcessingException {
