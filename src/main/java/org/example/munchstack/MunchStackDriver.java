@@ -2,6 +2,7 @@ package org.example.munchstack;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.example.munchstack.impl.FastFoodOrders;
 import org.example.munchstack.model.Burger;
 import org.example.munchstack.model.Drink;
@@ -28,8 +29,8 @@ public class MunchStackDriver {
 
     public static void main(String[] args) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm a z");
-        objectMapper.setDateFormat(df);
+//        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm a z");
+        objectMapper.registerModule(new JavaTimeModule());
 
         Logger.info("Welcome to MunchStack Fast Food Ordering System!");
         Logger.info("Initializing Fast Food Orders...");
@@ -104,9 +105,9 @@ public class MunchStackDriver {
         Logger.info("Listing All Orders:");
         fastFoodOrders.listOrders();
         // print the recent order using object mapper
-        Logger.info("Recent Order: {}", objectMapper.writeValueAsString(fastFoodOrders.getMostRecentOrder()));
+        Logger.info("Recent Order: {}", objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(fastFoodOrders.getMostRecentOrder()));
         // print the earliest order using object mapper
-        Logger.info("Earliest Order: {}", objectMapper.writeValueAsString(fastFoodOrders.getEarliestOrder()));
+        Logger.info("Earliest Order: {}", objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(fastFoodOrders.getEarliestOrder()));
 
         Logger.info("Total Orders: {}", fastFoodOrders.getOrderCount());
         Logger.info("Total Cost: ${}", fastFoodOrders.getTotalCost());
