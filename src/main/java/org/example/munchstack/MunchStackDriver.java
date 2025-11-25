@@ -10,8 +10,6 @@ import org.example.munchstack.model.FastFood;
 import org.example.munchstack.model.Pizza;
 
 import java.math.BigDecimal;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Month;
 
@@ -29,7 +27,6 @@ public class MunchStackDriver {
 
     public static void main(String[] args) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
-//        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm a z");
         objectMapper.registerModule(new JavaTimeModule());
 
         Logger.info("Welcome to MunchStack Fast Food Ordering System!");
