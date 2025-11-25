@@ -11,7 +11,6 @@ import org.example.munchstack.enums.STATUS;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-@ToString
 public class FastFood {
     private String name;
     private int quantity;
