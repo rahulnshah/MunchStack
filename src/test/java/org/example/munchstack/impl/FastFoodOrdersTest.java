@@ -7,36 +7,40 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.Locale;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class FastFoodOrdersTest {
-    
+
     private OrdersList<FastFood> orders;
 
     private FastFood mockFood1;
 
     private FastFood mockFood2;
 
+    private LocalDate mockDate;
+
     @BeforeEach
     void setUp() {
         this.mockFood1 = mock(FastFood.class);
         this.mockFood2 = mock(FastFood.class);
-        orders = new FastFoodOrders();
-
+        this.orders = new FastFoodOrders();
+        this.mockDate = LocalDate.of(2024, 1, 1);
         // Setup mock behaviors
         when(mockFood1.getName()).thenReturn("Pizza");
         when(mockFood1.getPrice()).thenReturn(new BigDecimal("10.00"));
         when(mockFood1.getQuantity()).thenReturn(2);
-        when(mockFood1.getCreatedAt()).thenReturn(new Date());
+        when(mockFood1.getCreatedAt()).thenReturn(mockDate);
 
         when(mockFood2.getName()).thenReturn("Burger");
         when(mockFood2.getPrice()).thenReturn(new BigDecimal("5.00"));
         when(mockFood2.getQuantity()).thenReturn(1);
-        when(mockFood2.getCreatedAt()).thenReturn(new Date(System.currentTimeMillis() - 1000));
+        when(mockFood2.getCreatedAt()).thenReturn(mockDate.plusWeeks(1));
     }
 
     @Test
@@ -76,11 +80,11 @@ class FastFoodOrdersTest {
     }
 
     @Test
-    void testGetRecentOrder() {
+    void testGetMostRecentOrder() {
         orders.addOrder(mockFood1);
         orders.addOrder(mockFood2);
 
-        assertEquals(mockFood1, orders.getRecentOrder());
+        assertEquals(mockFood2, orders.getMostRecentOrder());
     }
 
     @Test
@@ -88,7 +92,7 @@ class FastFoodOrdersTest {
         orders.addOrder(mockFood1);
         orders.addOrder(mockFood2);
 
-        assertEquals(mockFood2, orders.getEarliestOrder());
+        assertEquals(mockFood1, orders.getEarliestOrder());
     }
 
     @Test

@@ -2,20 +2,17 @@
 <!DOCTYPE configuration>
 
 <configuration>
-    <import class="ch.qos.logback.core.ConsoleAppender" />
+    <import class="ch.qos.logback.core.ConsoleAppender"/>
 
     <appender name="STDOUT" class="ConsoleAppender">
         <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
             <providers>
-                <timestamp />
-                <loggerName />
-                <logLevel />
-                <message />
+                <message/>
             </providers>
         </encoder>
     </appender>
 
     <root level="trace">
-        <appender-ref ref="STDOUT" />
+        <appender-ref ref="STDOUT"/>
     </root>
 </configuration>
